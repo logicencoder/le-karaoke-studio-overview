@@ -1,70 +1,78 @@
 # Le Karaoke Studio
 
-AI-assisted **karaoke subtitle burn-in** and optional **short-form video automation** for LogicEncoder operators. Source code is private: [le-karaoke-studio](https://github.com/logicencoder/le-karaoke-studio).
+AI-assisted **karaoke subtitle burn-in** and short-form video factory — upload a clip, transcribe with word-level timing, group readable lyric lines, render highlighted karaoke MP4, and optionally run an **Automate** pipeline that scrapes sources, categorizes with LLMs, and posts to social channels.
 
-Runs on a **local workstation or SOL server** (GPU Whisper). **Not** part of the logicencoder.com WordPress site on Hostinger.
+Private source: [logicencoder/le-karaoke-studio](https://github.com/logicencoder/le-karaoke-studio). API keys and platform cookies stay in your local `.env` and gitignored config — never in this overview repo.
 
-## What it does
+## The problem it solves
 
-**What:** Upload a music video or clip → automatic speech-to-text with word-level timing → grouped on-screen lyrics → rendered MP4 with highlighted “singing” words.  
-**Why:** Manual karaoke timing in an NLE is slow; Whisper plus a fixed visual template produces consistent social-ready clips.  
-**Who:** Operator producing lyric videos, news-style captioned shorts, or meme clips.
+Manual karaoke timing in a non-linear editor is slow and inconsistent. Whisper gives word timestamps, but raw tokens are not singable lines. Le Karaoke Studio turns speech-to-text into **on-screen lyrics with per-word highlights**, preset visual styles, and optional downstream automation for channels that publish captioned shorts at scale.
 
-## Studio workflow
+## Studio pipeline
 
-| Stage | What the operator sees |
-|-------|---------------------------|
-| Upload | Drag/drop MP4/MOV/WebM/MKV or audio; batch queue |
-| Analyze | Duration, resolution, FPS; optional trim and deinterlace |
-| Transcribe | Whisper (GPU when CUDA available) with language and model choice |
-| Phrases | Lines of 2–12 words; optional **ALL CAPS** output |
-| Render | Remotion (React) or experimental HyperFrames HTML renderer |
-| Result | In-browser preview, download MP4 |
+The **Studio** tab walks one job end to end:
 
-**Why separate phrase step:** Karaoke needs readable line breaks, not raw Whisper tokens.  
-**Who benefits:** Viewers get synced highlights; operator tunes max words per line and colors without editing timelines.
+1. **Upload** — drag/drop MP4, MOV, WebM, MKV, or audio; batch queue supported.
+2. **Analyze** — duration, resolution, FPS; optional trim and deinterlace.
+3. **Transcribe** — OpenAI Whisper with language and model choice; **CUDA strongly preferred** for speed.
+4. **Phrases** — merge tokens into lines of 2–12 words; optional ALL CAPS output for stylized channels.
+5. **Render** — Remotion 4 (React) or experimental HyperFrames (HTML + headless Chrome).
+6. **Preview / download** — in-browser result and exported MP4.
 
-## Visual and audio options
+Separate phrase editing exists because karaoke needs readable line breaks, not raw Whisper output.
 
-**What:** Subtitle presets (box style, glow, font), video effect presets (visualizers, ticker, logo overlay), beat-synced motion when music sync is enabled, per-speaker colors when diarization is on.  
-**Why:** One engine serves multiple “channels” (news ticker look vs neon club look) without separate apps.  
-**Who:** Operator branding clips; audience gets recognizable style.
+## Visual and audio styling
 
-## Downloader (DLV tab)
+Subtitle presets (box style, glow, font), video effect presets (visualizers, ticker, logo overlay), beat-synced motion when music sync is enabled, and per-speaker colors when diarization is on. One engine supports multiple channel looks — news ticker, neon club, minimal captions — without separate apps.
 
-**What:** Built-in yt-dlp UI — paste URL, pick quality, download into the studio pipeline.  
-**Why:** Source material often starts on YouTube; avoids a separate download step.  
-**Who:** Operator; respects platform ToS and local law when using downloaded media.
+**AFX / VFX** tabs expose audio and video effect labs for preset tuning before render.
 
-## UVR tab
+## Downloader (DLV)
 
-**What:** Ultimate Vocal Remover models split vocals vs instrumental stems before further processing.  
-**Why:** Cleaner transcription or remix workflows when the original mix is dense.  
-**Who:** Operator preparing difficult audio sources.
+Built-in **yt-dlp** UI — paste a URL, pick quality, pull source media straight into the studio pipeline without a separate download tool.
+
+## UVR — vocal separation
+
+**Ultimate Vocal Remover** models split vocals vs instrumental stems before transcription or remix work — useful when the original mix is dense.
 
 ## Automate module
 
-**What:** Background scraper watches configured channels (e.g. YouTube), pulls new clips in a duration window, runs Whisper + **OpenRouter** categorization, renders a short, then queues human approve → post to **X**, **Telegram**, and **Rumble** with scheduling and rate limits.  
-**Why:** Repetitive news/clip channels need a factory line, not one-off Studio uploads.  
-**Who:** Operator runs the factory; followers on social platforms receive captioned shorts. API keys and cookies stay on the operator machine (never in this public repo).
+Background workflow for repetitive clip channels:
 
-## Hardware expectations
+- Scraper watches configured sources (e.g. YouTube) for new clips in a duration window.
+- Whisper transcription plus **OpenRouter** categorization.
+- Render a short, then **human approve** → schedule posts to **X**, **Telegram**, and **Rumble** with rate limits.
 
-| Workload | Typical hardware |
-|----------|------------------|
-| Whisper | NVIDIA GPU (e.g. RTX class) strongly preferred |
-| Remotion render | CPU (Chromium + ffmpeg) |
-| HyperFrames | Node 22+, headless Chrome |
+Operator runs the factory on a trusted workstation; followers receive captioned shorts. Respect platform terms and local law when using downloaded or reposted media.
 
-## Related repositories
+## Dashboard layout
 
-| Repo | Role |
-|------|------|
-| [le-karaoke-studio](https://github.com/logicencoder/le-karaoke-studio) | Private source |
-| [le-karaoke-studio-overview](https://github.com/logicencoder/le-karaoke-studio-overview) | This overview |
+| Tab | Purpose |
+|-----|---------|
+| Studio | Upload → transcribe → phrases → render |
+| AFX / VFX | Effect labs and presets |
+| DLV | yt-dlp download queue |
+| UVR | Vocal/instrument stems |
+| Automate | Scrape → categorize → approve → distribute |
+| HW | GPU/CPU metrics |
 
-See [REPOS.md](REPOS.md).
+## Stack and quick start
 
-## Licensing
+| Layer | Technology |
+|-------|------------|
+| API | FastAPI + uvicorn (`server/main.py`, default port **8765**) |
+| Dashboard | Vite + React (default port **5175**) |
+| Transcription | Whisper (GPU when available) |
+| Render | Remotion 4 or HyperFrames (Node 22+) |
 
-Application code © LogicEncoder. Third-party models and platforms (Whisper, yt-dlp, social APIs) subject to their own terms.
+```bash
+bash setup-karaoke-venv.sh
+bash start-karaoke-studio.sh
+# Dashboard: http://localhost:5175
+```
+
+Copy `.env.example` to `.env` for Automate provider keys. See [REPOS.md](REPOS.md) for repository links.
+
+---
+
+**Made by [Logic Encoder](https://logicencoder.com)** · [GitHub](https://github.com/logicencoder) · [Contact](https://logicencoder.com/contact/)
