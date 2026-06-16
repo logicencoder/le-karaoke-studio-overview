@@ -37,6 +37,18 @@ Background scraper watches YouTube channels, Telegram, VK, RSS, and X. New video
 
 ---
 
+## Example use cases
+
+### Karaoke lyric video for a Slovak track
+
+You have an MP3 of an original song. **DLV** or local upload → **Studio** → set Whisper language to `sk`, pick **karaoke_gold** preset in **AFX**, enable beat sync, **GO**. You get an MP4 with word-highlighted lyrics timed to the vocal — ready for YouTube or Telegram without After Effects keyframing.
+
+### Automated breaking-news shorts
+
+You enable two YouTube OSINT channels in **Automate → Sources**, set categories and X/Telegram routes in **Distribute**, turn on **manual approve** in Test Lab first. The scraper pulls a 45 s clip, transcribes, LLM labels it `geopolitics`, renders ticker + subtitles, you **Approve** in Test Lab, and it posts on your schedule within the hourly rate limit.
+
+---
+
 ## Studio pipeline — step by step
 
 When you press **GO** on a job, the server runs these stages (`jobs/{id}/` on disk):
