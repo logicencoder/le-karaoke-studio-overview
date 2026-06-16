@@ -2,11 +2,13 @@
 
 **A local GPU workstation for karaoke burn-in, music visualizers, and automated short-form video — from raw media to styled MP4 to multi-platform posts.**
 
-LE Karaoke Studio turns video or audio into **word-timed karaoke subtitles** burned into the frame, with optional **full-screen music visualizers**, **tactical VFX overlays**, and **yt-dlp ingestion** — all in one React dashboard backed by a FastAPI server. A second mode, **Automate**, polls news and OSINT sources, transcribes clips, classifies them with LLMs, renders ticker-style shorts, and posts to **X, Telegram, and Rumble** on a schedule — with human approval when you want it.
+**LE Karaoke Studio** (flagship local video workstation) turns video or audio into **word-timed karaoke subtitles** burned into the frame, with optional **full-screen music visualizers**, **tactical VFX overlays**, and **yt-dlp ingestion** — all in one React dashboard backed by a FastAPI server. A second mode, **Automate**, polls news and OSINT sources, transcribes clips, classifies them with LLMs, renders ticker-style shorts, and posts to **X, Telegram, and Rumble** on a schedule — with human approval when you want it.
 
 Runs on **your machine** (GPU Whisper, Remotion or HyperFrames render). Not cloud SaaS. Not WordPress.
 
 **Made by [Logic Encoder](https://logicencoder.com)**
+
+**Product name:** LE Karaoke Studio · private repo `le-karaoke-studio`
 
 Private source: [logicencoder/le-karaoke-studio](https://github.com/logicencoder/le-karaoke-studio)
 
@@ -37,15 +39,117 @@ Background scraper watches YouTube channels, Telegram, VK, RSS, and X. New video
 
 ---
 
-## Example use cases
+## Feature examples — two per capability
 
-### Karaoke lyric video for a Slovak track
+### Studio — upload & batch
 
-You have an MP3 of an original song. **DLV** or local upload → **Studio** → set Whisper language to `sk`, pick **karaoke_gold** preset in **AFX**, enable beat sync, **GO**. You get an MP4 with word-highlighted lyrics timed to the vocal — ready for YouTube or Telegram without After Effects keyframing.
+1. Drop 5 conference talk MP4s — **GO BATCH** renders overnight queue while you sleep.
+2. Upload phone vertical video — probe shows 1080×1920; trim intro 3 s before GO.
 
-### Automated breaking-news shorts
+### Studio — Whisper transcribe
 
-You enable two YouTube OSINT channels in **Automate → Sources**, set categories and X/Telegram routes in **Distribute**, turn on **manual approve** in Test Lab first. The scraper pulls a 45 s clip, transcribes, LLM labels it `geopolitics`, renders ticker + subtitles, you **Approve** in Test Lab, and it posts on your schedule within the hourly rate limit.
+1. `large-v3` + CUDA on English podcast — word timestamps ready in minutes.
+2. Initial prompt with product names — Whisper spells `MEXC` correctly in phrases.
+
+### Studio — phrases & caps
+
+1. Max 5 words/line — long sentences break into readable karaoke lines.
+2. **ALL CAPS** + 200 ms delay — lyric hits sync with beat drop on chorus.
+
+### Studio — DeepL translation
+
+1. Slovak vocal → translate to `en` — burned subtitles in English for export.
+2. Keep `original` — lyrics stay Slovak for domestic YouTube upload.
+
+### Studio — subtitle presets & visualizers
+
+1. **karaoke_gold** + `visualizer_pulse` — music video look without manual keyframes.
+2. **news_cyan** + `karaoke` only — talking-head clip, no full-screen viz.
+
+### Studio — Remotion vs HyperFrames render
+
+1. **Remotion** default — complex React visualizer renders with beat sync.
+2. **HyperFrames** on Node 22 — faster burn-in when viz is off and phrases are final.
+
+### Studio — export NVENC / trim / deinterlace
+
+1. NVENC HEVC — 4K source downscaled export in half CPU time.
+2. Interlaced DV tape — **yadif** deinterlace before transcribe removes combing.
+
+### Studio — live progress & presets
+
+1. WebSocket log shows **render** at 67 % — cancel before bad settings waste GPU hour.
+2. Save preset `tiktok-bold-pulse` — reuse on next week's clips in one click.
+
+### AFX — preset rack & preview
+
+1. Audition **neon_pop** vs **outline_red** on same chorus — pick before GO.
+2. **Capture for GO** pushes AFX colors into Studio job — no retyping hex values.
+
+### AFX — playlist & beat sync
+
+1. Import 3-track EP — EQ meters show which track has louder bass for viz scaling.
+2. Beat detector on — preview pulses lock to kick drum before render.
+
+### VFX — tactical/cyber overlays
+
+1. **breaking_news** lower third on geopolitics clip — burn to MP4 for Telegram.
+2. **matrix** + **radar** stack — cyber drill recap video for internal training.
+
+### VFX — LLM suggest & burn
+
+1. Paste transcript snippet → **Suggest** picks `news_chyron` — accept and burn.
+2. WebM screen recording from canvas → **convert** to H.264 for X upload.
+
+### DLV — yt-dlp download
+
+1. Paste interview URL — audio-only `m4a` → send to Studio for subtitles.
+2. Playlist mode — download 10 episodes; playlist player picks best take.
+
+### DLV — cookies & history
+
+1. Upload YouTube cookies — age-gated source downloads for licensed review.
+2. Clear botched entry from **history** — retry with different format id.
+
+### UVR — stem separation
+
+1. Muddy karaoke MP3 — vocal stem → Studio transcribe accuracy improves.
+2. Instrumental stem — reuse as backing track for second language subtitle render.
+
+### Automate — Test Lab approve/reject
+
+1. Upload 40 s clip — **Reject** bad take; scraper never sees it.
+2. **Approve** after preview — post queue picks it up in next UTC window.
+
+### Automate — Sources scraper
+
+1. Enable two YouTube OSINT channels — poll every 5 min; new video auto-ingested.
+2. Telegram source — video document appears in Test Lab with duration gate pass.
+
+### Automate — Pipeline & categorize
+
+1. OpenRouter labels clip `cyber` — tweet text + thread generated in Slovak context block.
+2. Low confidence run — blocked from auto-post until you lower threshold or fix prompt.
+
+### Automate — Distribute X / Telegram / Rumble
+
+1. Category `geopolitics` → X thread + Telegram channel; affiliate link in last reply.
+2. `maxPostsPerHour=3` — burst of 5 scraper hits queues 2 for next hour.
+
+### Automate — Models benchmark
+
+1. Benchmark 3 free OpenRouter models — pick fastest for categorize step.
+2. HF model list — diarization-ready model noted for future Studio use.
+
+### Context Prompts
+
+1. Edit `tweetInstructions` — shorter hooks for X character limit.
+2. Whisper profile `sk-music` — initial prompt lists Slovak band names for gigs.
+
+### Settings & HW tab
+
+1. Default `large-v3` + `sk` language — every new job starts correct for your channel.
+2. HW tab shows VRAM 11/12 GB during render — you pause Automate until Studio finishes.
 
 ---
 
