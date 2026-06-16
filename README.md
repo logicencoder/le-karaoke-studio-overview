@@ -1,69 +1,54 @@
-# Le Karaoke Studio
+# LE Karaoke Studio
 
-AI-assisted **karaoke subtitle burn-in** and short-form video factory — upload a clip, transcribe with word-level timing, group readable lyric lines, render highlighted karaoke MP4, and optionally run an **Automate** pipeline that scrapes sources, categorizes with LLMs, and posts to social channels.
+AI-assisted **karaoke subtitle burn-in** and short-form media automation for Logic Encoder operators. The app turns raw media into timed lyric videos with configurable styling, rendering, and optional distribution workflows.
 
-Private source: [logicencoder/le-karaoke-studio](https://github.com/logicencoder/le-karaoke-studio). API keys and platform cookies stay in your local `.env` and gitignored config — never in this overview repo.
+Private source: [logicencoder/le-karaoke-studio](https://github.com/logicencoder/le-karaoke-studio). API keys and platform cookies stay in your local `.env` and gitignored config.
 
-## The problem it solves
+## Tech stack
 
-Manual karaoke timing in a non-linear editor is slow and inconsistent. Whisper gives word timestamps, but raw tokens are not singable lines. Le Karaoke Studio turns speech-to-text into **on-screen lyrics with per-word highlights**, preset visual styles, and optional downstream automation for channels that publish captioned shorts at scale.
+| Layer | Technologies |
+|-------|--------------|
+| API | FastAPI + uvicorn |
+| Transcription | Whisper (CUDA when available) |
+| Rendering | Remotion + optional HyperFrames path |
+| Dashboard | React + Vite |
+| Automation | yt-dlp + OpenRouter + social integrations |
 
 ## Studio pipeline
 
-The **Studio** tab walks one job end to end:
+The **Studio** tab runs one job end to end:
 
-1. **Upload** — drag/drop MP4, MOV, WebM, MKV, or audio; batch queue supported.
-2. **Analyze** — duration, resolution, FPS; optional trim and deinterlace.
-3. **Transcribe** — OpenAI Whisper with language and model choice; **CUDA strongly preferred** for speed.
-4. **Phrases** — merge tokens into lines of 2–12 words; optional ALL CAPS output for stylized channels.
-5. **Render** — Remotion 4 (React) or experimental HyperFrames (HTML + headless Chrome).
-6. **Preview / download** — in-browser result and exported MP4.
+1. **Upload** media (video/audio) and queue jobs.
+2. **Analyze** duration, resolution, FPS, and optional trim settings.
+3. **Transcribe** with Whisper and selected model/language.
+4. **Shape phrases** into readable karaoke lines.
+5. **Render** with Remotion or HyperFrames.
+6. **Preview and download** final MP4 output.
 
-Separate phrase editing exists because karaoke needs readable line breaks, not raw Whisper output.
+This separates transcription from phrase shaping so operators can keep lyric lines readable instead of dumping raw token timing.
 
-## Visual and audio styling
+## Visual and audio controls
 
-Subtitle presets (box style, glow, font), video effect presets (visualizers, ticker, logo overlay), beat-synced motion when music sync is enabled, and per-speaker colors when diarization is on. One engine supports multiple channel looks — news ticker, neon club, minimal captions — without separate apps.
+Subtitle style presets, visual effect controls, and timing behavior can be tuned per channel style. AFX/VFX and UVR tools support harder source material where vocals need cleanup before transcription.
 
-**AFX / VFX** tabs expose audio and video effect labs for preset tuning before render.
+## Downloader and Automate workflows
 
-## Downloader (DLV)
+The DLV tab provides built-in source ingestion with yt-dlp. The Automate module handles repetitive pipelines: discover source clips, classify and prepare content, render candidates, queue human approval, then publish to selected social destinations.
 
-Built-in **yt-dlp** UI — paste a URL, pick quality, pull source media straight into the studio pipeline without a separate download tool.
+Human approval stays in the loop before posting.
 
-## UVR — vocal separation
-
-**Ultimate Vocal Remover** models split vocals vs instrumental stems before transcription or remix work — useful when the original mix is dense.
-
-## Automate module
-
-Background workflow for repetitive clip channels:
-
-- Scraper watches configured sources (e.g. YouTube) for new clips in a duration window.
-- Whisper transcription plus **OpenRouter** categorization.
-- Render a short, then **human approve** → schedule posts to **X**, **Telegram**, and **Rumble** with rate limits.
-
-Operator runs the factory on a trusted workstation; followers receive captioned shorts. Respect platform terms and local law when using downloaded or reposted media.
-
-## Dashboard layout
+## Dashboard tabs
 
 | Tab | Purpose |
 |-----|---------|
 | Studio | Upload → transcribe → phrases → render |
-| AFX / VFX | Effect labs and presets |
-| DLV | yt-dlp download queue |
-| UVR | Vocal/instrument stems |
-| Automate | Scrape → categorize → approve → distribute |
+| AFX / VFX | Effect labs and preset tuning |
+| DLV | yt-dlp source queue |
+| UVR | Vocal/instrument stem separation |
+| Automate | Discover → classify → approve → distribute |
 | HW | GPU/CPU metrics |
 
-## Stack and quick start
-
-| Layer | Technology |
-|-------|------------|
-| API | FastAPI + uvicorn (`server/main.py`, default port **8765**) |
-| Dashboard | Vite + React (default port **5175**) |
-| Transcription | Whisper (GPU when available) |
-| Render | Remotion 4 or HyperFrames (Node 22+) |
+## Quick start
 
 ```bash
 bash setup-karaoke-venv.sh
@@ -71,7 +56,7 @@ bash start-karaoke-studio.sh
 # Dashboard: http://localhost:5175
 ```
 
-Copy `.env.example` to `.env` for Automate provider keys. See [REPOS.md](REPOS.md) for repository links.
+Copy `.env.example` to `.env` for provider credentials. See [REPOS.md](REPOS.md) for repository links.
 
 ---
 
