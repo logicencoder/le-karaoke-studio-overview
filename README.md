@@ -4,7 +4,7 @@
 
 **LE Karaoke Studio** (flagship local video workstation) turns video or audio into **word-timed karaoke subtitles** burned into the frame, with optional **full-screen music visualizers**, **tactical VFX overlays**, and **yt-dlp ingestion** — all in one React dashboard backed by a FastAPI server. A second mode, **Automate**, polls news and OSINT sources, transcribes clips, classifies them with LLMs, renders ticker-style shorts, and posts to **X, Telegram, and Rumble** on a schedule — with human approval when you want it.
 
-Runs on **your machine** (GPU Whisper, Remotion or HyperFrames render). Not cloud SaaS. Not WordPress.
+Runs on **your machine** — GPU Whisper transcription, Remotion or HyperFrames rendering, fully self-hosted.
 
 **Made by [Logic Encoder](https://logicencoder.com)**
 
@@ -14,7 +14,31 @@ Private source: [logicencoder/le-karaoke-studio](https://github.com/logicencoder
 
 ---
 
-## What problems it solves
+## Tech stack
+
+| Layer | Technologies |
+|-------|----------------|
+| API | Python 3, FastAPI, uvicorn, orjson |
+| Transcription | openai-whisper, PyTorch (CUDA), optional pyannote diarization |
+| Audio analysis | librosa, scipy, soundfile |
+| Translation | DeepL API, deep-translator |
+| Video prep | ffmpeg/ffprobe, yadif, NVENC/QSV/HEVC |
+| Studio render | Remotion 4 (React 18) **or** HyperFrames 0.6 (Node 22+) |
+| Automate render | FFmpeg ASS + drawtext ticker (+ Pillow VFX generator) |
+| Dashboard | Vite 5, React 18, TypeScript, lucide-react |
+| VFX Lab | HTML Canvas 2D + server-side preview/burn |
+| Downloader | yt-dlp |
+| Stem separation | audio-separator (UVR) |
+| Automate scrape | Telethon, httpx, yt-dlp |
+| LLM | OpenRouter (categorize, VFX suggest, chat, model benchmarks) |
+| Social post | twikit, Playwright, Telethon |
+| Realtime UI | WebSocket log bus |
+| Storage | Filesystem `jobs/`, `automate_runs/`, JSON configs (gitignored) |
+| 3D / motion | three.js, gsap, matter-js, animejs, simplex-noise (Remotion visualizers) |
+
+---
+
+## Workflow pains it removes
 
 | Pain | How LE Karaoke Studio handles it |
 |------|--------------------------------|
@@ -39,7 +63,7 @@ Background scraper watches YouTube channels, Telegram, VK, RSS, and X. New video
 
 ---
 
-## Feature examples — two per capability
+## In practice
 
 ### Studio — upload & batch
 
@@ -389,7 +413,7 @@ Telegram bot alerts by category; blocked-run and error notifications; **send tes
 
 ### Video editor
 
-Placeholder tab (`ready: false`) — reserved for future NLE-style editing. Not shipped yet.
+Placeholder tab (`ready: false`) — reserved for the planned NLE-style editor.
 
 ---
 
@@ -530,31 +554,6 @@ Multi-select upload → **GO BATCH** → sequential renders while you work other
 
 External helpers in Logic Encoder `useful-scripts`: `util_karaoke_operator_preflight.sh` (GPU/ffmpeg/API check), `util_karaoke_job_smoke.sh` (process job + poll until done).
 
----
-
-## Tech stack
-
-| Layer | Technologies |
-|-------|----------------|
-| API | Python 3, FastAPI, uvicorn, orjson |
-| Transcription | openai-whisper, PyTorch (CUDA), optional pyannote diarization |
-| Audio analysis | librosa, scipy, soundfile |
-| Translation | DeepL API, deep-translator |
-| Video prep | ffmpeg/ffprobe, yadif, NVENC/QSV/HEVC |
-| Studio render | Remotion 4 (React 18) **or** HyperFrames 0.6 (Node 22+) |
-| Automate render | FFmpeg ASS + drawtext ticker (+ Pillow VFX generator) |
-| Dashboard | Vite 5, React 18, TypeScript, lucide-react |
-| VFX Lab | HTML Canvas 2D + server-side preview/burn |
-| Downloader | yt-dlp |
-| Stem separation | audio-separator (UVR) |
-| Automate scrape | Telethon, httpx, yt-dlp |
-| LLM | OpenRouter (categorize, VFX suggest, chat, model benchmarks) |
-| Social post | twikit, Playwright, Telethon |
-| Realtime UI | WebSocket log bus |
-| Storage | Filesystem `jobs/`, `automate_runs/`, JSON configs (gitignored) |
-| 3D / motion | three.js, gsap, matter-js, animejs, simplex-noise (Remotion visualizers) |
-
----
 
 ## Related repositories
 
