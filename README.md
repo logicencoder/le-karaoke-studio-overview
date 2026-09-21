@@ -1,5 +1,7 @@
 # LE Karaoke Studio
 
+![LE Karaoke Studio — video workstation dashboard](assets/le-karaoke.png)
+
 **A local GPU workstation for karaoke burn-in, music visualizers, and automated short-form video — from raw media to styled MP4 to multi-platform posts.**
 
 **LE Karaoke Studio** (flagship local video workstation) turns video or audio into **word-timed karaoke subtitles** burned into the frame, with optional **full-screen music visualizers**, **tactical VFX overlays**, and **yt-dlp ingestion** — all in one React dashboard backed by a FastAPI server. A second mode, **Automate**, polls news and OSINT sources, transcribes clips, classifies them with LLMs, renders ticker-style shorts, and posts to **X, Telegram, and Rumble** on a schedule — with human approval when you want it.
