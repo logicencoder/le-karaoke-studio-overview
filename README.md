@@ -2,7 +2,7 @@
 
 ![LE Karaoke Studio workspace](assets/le-karaoke.png)
 
-Turning source audio or video into a finished karaoke or captioned clip often means moving between download, transcription, editing and export tools. LE Karaoke Studio brings those stages into one workspace, with a hands-on studio and an automation area for repeatable media work.
+Turning source audio or video into a finished karaoke or captioned clip usually means moving between download, stem separation, transcription, editing and export tools. LE Karaoke Studio puts those stages into one web application with ten workspaces: **Studio** (transcribe, edit lines, style and render), **Audio Effects Lab** and **Video Effects Lab**, **Context Prompts**, a **Video editor**, **DLV** (the downloader), **UVR** (vocal and stem separation), **HW** (a GPU watch panel), **Automate** (a managed publishing workflow) and **Settings**. It runs on a GPU machine under the operator's own control.
 
 ## Tech stack
 
@@ -31,7 +31,7 @@ Audio and visual effects serve the clip's presentation. Keeping them within the 
 
 ## Download and separate stems
 
-The downloader brings source acquisition into the workspace, with progress and history for ongoing work. Stem separation provides another preparation step when vocals or accompaniment need independent attention. Keeping these tasks nearby reduces tool switching before the main studio work begins.
+**DLV** downloads a source with progress and history, using yt-dlp, and **UVR** separates vocals from accompaniment as queued jobs with a choice of models. Both feed the clip that is then edited in the Studio, so source preparation stays attached to the project.
 
 Source preparation can require more than obtaining a single video. Download history and stem work keep those preliminary tasks connected to the clip that will be edited.
 
@@ -43,7 +43,7 @@ A visible job workflow helps distinguish material still being prepared from a fi
 
 ## Automate repeatable production
 
-The automation area brings source selection, categorisation, review and distribution into a managed workflow. Test Lab approval and rejection allow human review before moving forward, while queues and history help follow what happened. Configured publication workflows support X, Telegram and Rumble. Model comparisons, context prompts, settings and hardware visibility support refining that workflow over time.
+The **Automate** workspace has eight sub-panels: **Test Lab** (finished runs wait here until you approve or reject them), **Stats**, **Sources**, **Pipeline**, **Chat**, **Models** (compare the language models used), **Distribute** (publication workflows for X, Telegram and Rumble), **Notifications**, with an activity log below them. A status bar shows runs waiting for approval, paused runs and the posting queue with its posts per hour, so nothing is published without the review you configured.
 
 Automation is easier to supervise when proposed material, review decisions and publication history are visible together. The operator can follow the work through the available stages rather than treating distribution as an unexplained final step.
 
