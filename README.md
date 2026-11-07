@@ -1,6 +1,6 @@
 # LE Karaoke Studio
 
-![LE Karaoke Studio workspace](assets/le-karaoke-studio-transcription-caption-editor.png)
+![LE Karaoke Studio with audio effects, spectrum and visualiser presets](assets/le-karaoke-studio-audio-effects-spectrum-visualiser-presets.png)
 
 Turning source audio or video into a finished karaoke or captioned clip usually means moving between download, stem separation, transcription, editing and export tools. LE Karaoke Studio puts those stages into one web application with ten workspaces: **Studio** (transcribe, edit lines, style and render), **Audio Effects Lab** and **Video Effects Lab**, **Context Prompts**, a **Video editor**, **DLV** (the downloader), **UVR** (vocal and stem separation), **HW** (a GPU watch panel), **Automate** (a managed publishing workflow) and **Settings**. It runs on a GPU machine under the operator's own control.
 
@@ -17,6 +17,8 @@ Upload a clip or work through a batch, review its format and choose the part tha
 
 Begin by preparing the source and reviewing the text that will appear on screen. Correcting phrasing and timing at this stage makes the later styling work easier to judge.
 
+![LE Karaoke Studio workspace](assets/le-karaoke-studio-transcription-caption-editor.png)
+
 ## Shape subtitles and visualisers
 
 Choose subtitle styling, line presentation and visualiser options to build a consistent look across clips. Saved presets reduce repeated setup when several videos should share the same style. Preview-oriented work helps refine the result before committing to a longer export.
@@ -31,7 +33,6 @@ The audio-effects and visual-effects areas let the operator experiment with the 
 
 Audio and visual effects serve the clip's presentation. Keeping them within the studio lets the operator explore a treatment while retaining the underlying transcription and subtitle context.
 
-![LE Karaoke Studio audio effects and visualiser presets](assets/le-karaoke-studio-audio-effects-spectrum-visualiser-presets.png)
 
 ![LE Karaoke Studio video effects and overlay controls](assets/le-karaoke-studio-video-effects-overlay-controls.png)
 
