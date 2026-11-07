@@ -1,6 +1,6 @@
 # LE Karaoke Studio
 
-![LE Karaoke Studio workspace](assets/le-karaoke.png)
+![LE Karaoke Studio workspace](assets/le-karaoke-studio-transcription-caption-editor.png)
 
 Turning source audio or video into a finished karaoke or captioned clip usually means moving between download, stem separation, transcription, editing and export tools. LE Karaoke Studio puts those stages into one web application with ten workspaces: **Studio** (transcribe, edit lines, style and render), **Audio Effects Lab** and **Video Effects Lab**, **Context Prompts**, a **Video editor**, **DLV** (the downloader), **UVR** (vocal and stem separation), **HW** (a GPU watch panel), **Automate** (a managed publishing workflow) and **Settings**. It runs on a GPU machine under the operator's own control.
 
