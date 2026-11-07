@@ -23,17 +23,24 @@ Choose subtitle styling, line presentation and visualiser options to build a con
 
 Presets help keep a series of clips visually consistent. Use the preview to compare choices in the context of the actual material before spending time on a finished render.
 
+![LE Karaoke Studio subtitle timeline editor](assets/le-karaoke-studio-subtitle-timeline-editor.png)
+
 ## Audio and visual effects workspaces
 
 The audio-effects and visual-effects areas let the operator experiment with the presentation around the clip. Playlist and beat-related controls support musical timing, while overlay choices cover subtle effects through more elaborate styles. Assistance tools can suggest options without replacing the operator's final choice.
 
 Audio and visual effects serve the clip's presentation. Keeping them within the studio lets the operator explore a treatment while retaining the underlying transcription and subtitle context.
 
+![LE Karaoke Studio audio effects and visualiser presets](assets/le-karaoke-studio-audio-effects-spectrum-visualiser-presets.png)
+
+![LE Karaoke Studio video effects and overlay controls](assets/le-karaoke-studio-video-effects-overlay-controls.png)
+
 ## Download and separate stems
 
 **DLV** downloads a source with progress and history, using yt-dlp, and **UVR** separates vocals from accompaniment as queued jobs with a choice of models. Both feed the clip that is then edited in the Studio, so source preparation stays attached to the project.
 
 Source preparation can require more than obtaining a single video. Download history and stem work keep those preliminary tasks connected to the clip that will be edited.
+
 
 ## Review, render and export
 
