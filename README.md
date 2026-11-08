@@ -17,8 +17,6 @@ Upload a clip or work through a batch, review its format and choose the part tha
 
 Begin by preparing the source and reviewing the text that will appear on screen. Correcting phrasing and timing at this stage makes the later styling work easier to judge.
 
-![LE Karaoke Studio workspace](assets/le-karaoke-studio-transcription-caption-editor.png)
-
 ![LE Karaoke Studio with audio effects, spectrum and visualiser presets](assets/le-karaoke-studio-audio-effects-spectrum-visualiser-presets.png)
 
 ## Shape subtitles and visualisers
@@ -34,7 +32,6 @@ Presets help keep a series of clips visually consistent. Use the preview to comp
 The audio-effects and visual-effects areas let the operator experiment with the presentation around the clip. Playlist and beat-related controls support musical timing, while overlay choices cover subtle effects through more elaborate styles. Assistance tools can suggest options without replacing the operator's final choice.
 
 Audio and visual effects serve the clip's presentation. Keeping them within the studio lets the operator explore a treatment while retaining the underlying transcription and subtitle context.
-
 
 ![LE Karaoke Studio video effects and overlay controls](assets/le-karaoke-studio-video-effects-overlay-controls.png)
 
@@ -57,7 +54,6 @@ A visible job workflow helps distinguish material still being prepared from a fi
 The **Automate** workspace has eight sub-panels: **Test Lab** (finished runs wait here until you approve or reject them), **Stats**, **Sources**, **Pipeline**, **Chat**, **Models** (compare the language models used), **Distribute** (publication workflows for X, Telegram and Rumble), **Notifications**, with an activity log below them. A status bar shows runs waiting for approval, paused runs and the posting queue with its posts per hour, so nothing is published without the review you configured.
 
 Automation is easier to supervise when proposed material, review decisions and publication history are visible together. The operator can follow the work through the available stages rather than treating distribution as an unexplained final step.
-
 
 ---
 
